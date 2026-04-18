@@ -27,7 +27,8 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
 configuration = Configuration(access_token=LINE_CHANNEL_ACCESS_TOKEN)
 genai.configure(api_key=GEMINI_API_KEY)
-openai_client = OpenAI(api_key=OPENAI_API_KEY)
+import httpx
+openai_client = OpenAI(api_key=OPENAI_API_KEY, http_client=httpx.Client())
 
 # 暫存對話狀態（簡單的 in-memory，每次重啟會清除）
 user_sessions = {}
